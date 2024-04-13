@@ -122,22 +122,22 @@ export const Task = styled(TaskEl)`
     background-color: rgba(100, 100, 100, 0.3);
   }
 
-  .task::before{
+  .task::before {
     content: "";
     position: absolute;
     left: 0;
     top: 50%;
     width: 0;
     height: 1px;
-    background-color: #4E5162;
-    transition: .3s width ease-out;
+    background-color: #4e5162;
+    transition: 0.3s width ease-out;
   }
 
   .task.completed::before {
     width: 100%;
   }
 
-  .task{
+  .task {
     position: relative;
     width: 100%;
     height: 100%;
@@ -148,4 +148,15 @@ export const Task = styled(TaskEl)`
   .completed {
     color: #bbb;
   }
+`;
+
+export const IconsVisor = styled.div`
+  background: #fff;
+  width: 400px;
+  opacity: 1;
+  height: 700px;
+  overflow-y: scroll;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 `;

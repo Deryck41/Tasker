@@ -38,7 +38,7 @@ function App() {
 
   const AddTask = () => {
     const copyArr = [...tasks];
-    copyArr.push({ text: `new ${tasks.length + 1}`, status: true });
+    copyArr.push({ text: `new ${tasks.length + 1}`, status: true, icon: 'NotepadText' });
     SetTasks(copyArr);
   };
 
@@ -54,6 +54,11 @@ function App() {
     SetTasks(copyArr);
   };
 
+  const ChangeIcon = (index, icon) => {
+    const copyArr = [...tasks];
+    copyArr[index]['icon'] = icon;
+    SetTasks(copyArr);
+  }
 
   return (
     <Container>
@@ -88,6 +93,10 @@ function App() {
               }}
               onEdit={(value) => {
                 EditTask(idx, value);
+              }}
+              icon={task.icon}
+              onIconChange={(newIcon) => {
+                ChangeIcon(idx, newIcon);
               }}
             />
           ))}
