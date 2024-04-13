@@ -1,16 +1,17 @@
 :root {
   line-height: 1.5;
   font-weight: 400;
-  background-color: #F0EFE9;
-  color: #4E5162;
+  background-color: #f0efe9;
+  color: #4e5162;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-*{
+* {
   box-sizing: border-box;
+  user-select: none;
 }
 
 a {
@@ -67,7 +68,7 @@ button:focus-visible {
   }
 }
 
-#root{
+#root {
   display: flex;
   justify-content: center;
   align-items: center;

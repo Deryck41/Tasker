@@ -1,5 +1,10 @@
 import PropTypes from "prop-types";
-import { FlexRow, TransparentButton, IconsVisor } from "./shared/styled";
+import {
+  FlexRow,
+  TransparentButton,
+  IconsVisor,
+  ColorChoiser,
+} from "./shared/styled";
 import { Trash, Pencil } from "lucide-react";
 import { useState } from "react";
 import TaskTitle from "./TaskTitle";
@@ -14,12 +19,13 @@ export default function TaskEl({
   onEdit,
   icon,
   onIconChange,
+  onIconColorChange,
   className,
 }) {
   const [hover, SetHover] = useState(false);
   const [editMode, SetEditMode] = useState(false);
   const [iconsListVisible, SetIconsListVisible] = useState(false);
-  
+
   return (
     <FlexRow
       justify="space-between"
@@ -45,7 +51,8 @@ export default function TaskEl({
         onClick={() => {
           SetIconsListVisible(true);
         }}
-        name={icon}
+        name={icon.text}
+        color={icon.color}
       />
 
       {hover ? (
@@ -66,15 +73,31 @@ export default function TaskEl({
       ) : null}
 
       {iconsListVisible && (
-        <IconsVisor
+        <div
           onMouseLeave={() => {
             SetIconsListVisible(false);
           }}
         >
-          {GetAllIconsNames().map((name, idx) => (
-            <Icon key={idx} name={name} onClick={()=> {onIconChange(name)}}/>
-          ))}
-        </IconsVisor>
+          <ColorChoiser
+            onChangeComplete={onIconColorChange}
+            defaultColor={icon.color}
+          />
+          <IconsVisor
+            onMouseLeave={() => {
+              SetIconsListVisible(false);
+            }}
+          >
+            {GetAllIconsNames().map((name, idx) => (
+              <Icon
+                key={idx}
+                name={name}
+                onClick={() => {
+                  onIconChange(name);
+                }}
+              />
+            ))}
+          </IconsVisor>
+        </div>
       )}
     </FlexRow>
   );
@@ -87,6 +110,7 @@ TaskEl.propTypes = {
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
-  icon: PropTypes.string,
-  onIconChange: PropTypes.func
+  icon: PropTypes.object,
+  onIconChange: PropTypes.func,
+  onIconColorChange: PropTypes.func,
 };

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import TaskEl from "../Task";
+import ColorPicker from "../ColorPicker";
 
 export const Container = styled.div`
   width: 600px;
@@ -159,4 +160,10 @@ export const IconsVisor = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
+`;
+
+export const ColorChoiser = styled(ColorPicker)`
+  position: absolute;
+  left: 0;
+  top: 0;
 `;

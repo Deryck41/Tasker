@@ -1,12 +1,13 @@
-import { icons } from 'lucide-react';
-import PropTypes from 'prop-types';
+import { icons } from "lucide-react";
+import PropTypes from "prop-types";
 
-export default function Icon({name, onClick}){
-    const LucideIcon = icons[name];
-    return <LucideIcon onClick={onClick}/>
+export default function Icon({ name, color, onClick }) {
+  const LucideIcon = icons[name];
+  return <LucideIcon color={color} onClick={onClick} />;
 }
 
 Icon.propTypes = {
-    name: PropTypes.string.isRequired,
-    onClick: PropTypes.func
-}
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  onClick: PropTypes.func,
+};

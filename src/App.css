@@ -41,8 +41,8 @@
   color: #888;
 }
 
-.completed::before{
-  content: '';
+.completed::before {
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -51,7 +51,7 @@
   background-color: #ccc;
 }
 
-.completed{
+.completed {
   color: #ccc;
   position: relative;
 }

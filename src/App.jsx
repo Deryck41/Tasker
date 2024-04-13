@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     setTimeout(Update, 5000);
-  }, []);
+  });
 
   useEffect(() => {
     SaveToStorage("tasks", tasks);
@@ -38,7 +38,11 @@ function App() {
 
   const AddTask = () => {
     const copyArr = [...tasks];
-    copyArr.push({ text: `new ${tasks.length + 1}`, status: true, icon: 'NotepadText' });
+    copyArr.push({
+      text: `new ${tasks.length + 1}`,
+      status: true,
+      icon: { text: "NotepadText", color: "#50E3A4" },
+    });
     SetTasks(copyArr);
   };
 
@@ -56,9 +60,15 @@ function App() {
 
   const ChangeIcon = (index, icon) => {
     const copyArr = [...tasks];
-    copyArr[index]['icon'] = icon;
+    copyArr[index]["icon"].text = icon;
     SetTasks(copyArr);
-  }
+  };
+
+  const ChangeIconColor = (index, color) => {
+    const copyArr = [...tasks];
+    copyArr[index]["icon"].color = color;
+    SetTasks(copyArr);
+  };
 
   return (
     <Container>
@@ -97,6 +107,9 @@ function App() {
               icon={task.icon}
               onIconChange={(newIcon) => {
                 ChangeIcon(idx, newIcon);
+              }}
+              onIconColorChange={(newColor) => {
+                ChangeIconColor(idx, newColor);
               }}
             />
           ))}
