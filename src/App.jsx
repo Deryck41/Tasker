@@ -1,119 +1,34 @@
-import { SaveToStorage, GetFromStorage } from "./utils/local-storager";
-import { useEffect, useState } from "react";
-import {
-  Container,
-  Button,
-  DisplayMonth,
-  DisplayDay,
-  DisplayYear,
-  FlexRow,
-  FlexCol,
-  DisplayWeekDay,
-  TaskContainer,
-  Task,
-} from "./components/shared/styled";
+import { Container, Button } from "./components/shared/styled";
 import { Plus } from "lucide-react";
+import TopBar from "./components/TopBar";
+import DraggableTaskList from "./components/DraggableTaskList";
+import { useTasks } from "./hooks/useTasks";
+
 function App() {
-  const [date, SetDate] = useState(new Date());
-  const [tasks, SetTasks] = useState(GetFromStorage("tasks") || []);
-
-  const Update = () => {
-    SetDate(new Date());
-    setTimeout(Update, 50000);
-  };
-
-  useEffect(() => {
-    setTimeout(Update, 5000);
-  });
-
-  useEffect(() => {
-    SaveToStorage("tasks", tasks);
-  }, [tasks]);
-
-  const SwitchTask = (index) => {
-    const copyArr = [...tasks];
-    copyArr[index]["status"] = !copyArr[index]["status"];
-    SetTasks(copyArr);
-  };
-
-  const AddTask = () => {
-    const copyArr = [...tasks];
-    copyArr.push({
-      text: `new ${tasks.length + 1}`,
-      status: true,
-      icon: { text: "NotepadText", color: "#50E3A4" },
-    });
-    SetTasks(copyArr);
-  };
-
-  const Delete = (index) => {
-    const copyArr = [...tasks];
-    copyArr.splice(index, 1);
-    SetTasks(copyArr);
-  };
-
-  const EditTask = (index, value) => {
-    const copyArr = [...tasks];
-    copyArr[index]["text"] = value;
-    SetTasks(copyArr);
-  };
-
-  const ChangeIcon = (index, icon) => {
-    const copyArr = [...tasks];
-    copyArr[index]["icon"].text = icon;
-    SetTasks(copyArr);
-  };
-
-  const ChangeIconColor = (index, color) => {
-    const copyArr = [...tasks];
-    copyArr[index]["icon"].color = color;
-    SetTasks(copyArr);
-  };
+  const {
+    tasks,
+    SwitchTask,
+    AddTask,
+    Delete,
+    EditTask,
+    ChangeIcon,
+    ChangeIconColor,
+    OnDragEnd,
+  } = useTasks();
 
   return (
     <Container>
       <Container style={{ backgroundColor: "#FFF" }}>
-        <FlexRow justify="space-between" style={{ padding: "30px" }}>
-          <FlexRow>
-            <DisplayDay>{date.getDate()}</DisplayDay>
-            <FlexCol>
-              <DisplayMonth>
-                {new Intl.DateTimeFormat("en-US", { month: "short" }).format(
-                  date
-                )}
-              </DisplayMonth>
-              <DisplayYear>{date.getFullYear()}</DisplayYear>
-            </FlexCol>
-          </FlexRow>
-          <DisplayWeekDay>
-            {new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date)}
-          </DisplayWeekDay>
-        </FlexRow>
-        <TaskContainer>
-          {tasks.map((task, idx) => (
-            <Task
-              key={idx}
-              text={task.text}
-              status={task.status}
-              onClick={() => {
-                SwitchTask(idx);
-              }}
-              onDelete={() => {
-                Delete(idx);
-              }}
-              onEdit={(value) => {
-                EditTask(idx, value);
-              }}
-              icon={task.icon}
-              onIconChange={(newIcon) => {
-                ChangeIcon(idx, newIcon);
-              }}
-              onIconColorChange={(newColor) => {
-                ChangeIconColor(idx, newColor);
-              }}
-            />
-          ))}
-        </TaskContainer>
+        <TopBar />
+        <DraggableTaskList
+          tasks={tasks}
+          OnDragEnd={OnDragEnd}
+          SwitchTask={SwitchTask}
+          Delete={Delete}
+          EditTask={EditTask}
+          ChangeIcon={ChangeIcon}
+          ChangeIconColor={ChangeIconColor}
+        />
       </Container>
       <Button
         onClick={AddTask}

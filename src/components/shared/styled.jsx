@@ -115,9 +115,9 @@ export const Task = styled(TaskEl)`
   user-select: none;
   display: flex;
   font-family: Roboto, sans-serif;
-  transition: 0.3s all ease-out;
+  // transition: 0.3s all ease-out;
   height: 44px;
-  cursor: pointer;
+  cursor: auto !important;
 
   &:hover {
     background-color: rgba(100, 100, 100, 0.3);

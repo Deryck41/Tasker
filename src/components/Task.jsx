@@ -20,14 +20,19 @@ export default function TaskEl({
   icon,
   onIconChange,
   onIconColorChange,
+  innerRef,
+  dragableProps,
+  dragHandleProps,
   className,
 }) {
   const [hover, SetHover] = useState(false);
   const [editMode, SetEditMode] = useState(false);
   const [iconsListVisible, SetIconsListVisible] = useState(false);
-
   return (
     <FlexRow
+      ref={innerRef}
+      {...dragableProps}
+      {...dragHandleProps}
       justify="space-between"
       className={className}
       onMouseEnter={() => {
@@ -113,4 +118,7 @@ TaskEl.propTypes = {
   icon: PropTypes.object,
   onIconChange: PropTypes.func,
   onIconColorChange: PropTypes.func,
+  innerRef: PropTypes.func,
+  dragHandleProps: PropTypes.object,
+  dragableProps: PropTypes.object
 };
