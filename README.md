@@ -12,6 +12,8 @@ Todo App is a web application built using React for creating, viewing, editing, 
 - Marking tasks as completed or incomplete.
 - Editing task text.
 - Deleting tasks.
+- Drag and drop tasks.
+- Changing tasks icons.
 
 ## Author
 

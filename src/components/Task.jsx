@@ -120,5 +120,5 @@ TaskEl.propTypes = {
   onIconColorChange: PropTypes.func,
   innerRef: PropTypes.func,
   dragHandleProps: PropTypes.object,
-  dragableProps: PropTypes.object
+  dragableProps: PropTypes.object,
 };
