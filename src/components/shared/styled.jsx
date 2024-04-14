@@ -115,7 +115,7 @@ export const Task = styled(TaskEl)`
   user-select: none;
   display: flex;
   font-family: Roboto, sans-serif;
-  // transition: 0.3s all ease-out;
+  transition: 0.3s background-color ease-out;
   height: 44px;
   cursor: auto !important;
 
